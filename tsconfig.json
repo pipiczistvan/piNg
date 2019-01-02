@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "pi-leader-line": [
+        "dist/pi-leader-line"
+      ],
+      "pi-leader-line/*": [
+        "dist/pi-leader-line/*"
+      ]
+    }
   }
 }

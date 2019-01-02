@@ -29,7 +29,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/leader-line/leader-line.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -127,6 +129,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "pi-leader-line": {
+      "root": "projects/pi-leader-line",
+      "sourceRoot": "projects/pi-leader-line/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/pi-leader-line/tsconfig.lib.json",
+            "project": "projects/pi-leader-line/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pi-leader-line/src/test.ts",
+            "tsConfig": "projects/pi-leader-line/tsconfig.spec.json",
+            "karmaConfig": "projects/pi-leader-line/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pi-leader-line/tsconfig.lib.json",
+              "projects/pi-leader-line/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
