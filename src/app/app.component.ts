@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PiLeaderLineOptions, PiLeaderLineDashAnimationTiming } from 'projects/pi-leader-line/src/lib/pi-leader-line.types';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'piNg';
+
+  public lineOptions: PiLeaderLineOptions = {
+    color: 'red'
+  };
 }
