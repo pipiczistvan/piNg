@@ -1,4 +1,4 @@
-import { PiLeaderLineOptions, PiLeaderLinePath, PiLeaderLineSocket, PiLeaderLinePlug, PiLeaderLineDash, PiLeaderLineDashAnimation, PiLeaderLineDashAnimationTiming, PiLeaderLineGradient, PiLeaderLineShadow } from './pi-leader-line.types';
+import { PiLeaderLineOptions, PiLeaderLinePath, PiLeaderLineSocket, PiLeaderLinePlug, PiLeaderLineDash, PiLeaderLineAnimation, PiLeaderLineAnimationTiming, PiLeaderLineGradient, PiLeaderLineShadow } from './pi-leader-line.types';
 
 const DEFAULT_OPTIONS: PiLeaderLineOptions = {
     color: 'coral',
@@ -37,9 +37,9 @@ const DEFAULT_DASH_OPTIONS: PiLeaderLineDash = {
     animation: false
 }
 
-const DEFAULT_DASH_ANIMATION_OPTIONS: PiLeaderLineDashAnimation = {
+const DEFAULT_DASH_ANIMATION_OPTIONS: PiLeaderLineAnimation = {
     duration: 1000,
-    timing: PiLeaderLineDashAnimationTiming.LINEAR
+    timing: PiLeaderLineAnimationTiming.LINEAR
 }
 
 const DEFAULT_GRADIENT_OPTIONS: PiLeaderLineGradient = {
@@ -57,13 +57,21 @@ const DEFAULT_SHADOW_OPTIONS: PiLeaderLineShadow = {
 
 export default class PiLeaderLineOptionsMerger {
 
-    public static mergeWithDefaults(options: PiLeaderLineOptions): PiLeaderLineOptions {
+    public static mergeLineOptionsWithDefaults(options: PiLeaderLineOptions): PiLeaderLineOptions {
         const mergedOptions: PiLeaderLineOptions = { ...DEFAULT_OPTIONS, ...options };
         mergedOptions.dash = this.mergeDashOptionsWithDefaults(mergedOptions.dash);
         mergedOptions.gradient = this.mergeGradientOptionsWithDefaults(mergedOptions.gradient);
         mergedOptions.dropShadow = this.mergeShadowOptionsWithDefaults(mergedOptions.dropShadow);
 
         return mergedOptions;
+    }
+
+    public static mergeShowAnimationOptionsWithDefaults(options: PiLeaderLineAnimation): PiLeaderLineAnimation {
+        return { ...DEFAULT_DASH_ANIMATION_OPTIONS, ...options };
+    }
+
+    public static mergeHideAnimationOptionsWithDefaults(options: PiLeaderLineAnimation): PiLeaderLineAnimation {
+        return { ...DEFAULT_DASH_ANIMATION_OPTIONS, ...options };
     }
 
     private static mergeDashOptionsWithDefaults(options: boolean | PiLeaderLineDash): boolean | PiLeaderLineDash {
@@ -76,7 +84,7 @@ export default class PiLeaderLineOptionsMerger {
         return mergedOptions;
     }
 
-    private static mergeDashAnimationOptionsWithDefaults(options: boolean | PiLeaderLineDashAnimation): boolean | PiLeaderLineDashAnimation {
+    private static mergeDashAnimationOptionsWithDefaults(options: boolean | PiLeaderLineAnimation): boolean | PiLeaderLineAnimation {
         if (typeof options === 'boolean') {
             return options ? DEFAULT_DASH_ANIMATION_OPTIONS : false;
         }

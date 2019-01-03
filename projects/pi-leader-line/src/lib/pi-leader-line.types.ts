@@ -166,10 +166,10 @@ export interface PiLeaderLineDash {
      * Or true to enable it with all default options.
      * @default false
      */
-    animation?: boolean | PiLeaderLineDashAnimation;
+    animation?: boolean | PiLeaderLineAnimation;
 }
 
-export interface PiLeaderLineDashAnimation {
+export interface PiLeaderLineAnimation {
     /**
      * A number determining how long (milliseconds) the animation will run.
      * @default 1000
@@ -179,7 +179,7 @@ export interface PiLeaderLineDashAnimation {
      * An Array that is [x1, y1, x2, y2] as a "timing function" that indicates how to change the speed.
      * @default PiLeaderLineDashAnimationTiming.LINEAR
      */
-    timing?: number[] | PiLeaderLineDashAnimationTiming;
+    timing?: number[] | PiLeaderLineAnimationTiming;
 }
 
 export interface PiLeaderLineGradient {
@@ -250,10 +250,16 @@ export enum PiLeaderLinePlug {
     BEHIND = 'behind'
 }
 
-export enum PiLeaderLineDashAnimationTiming {
+export enum PiLeaderLineAnimationTiming {
     ASE = 'ase',
     LINEAR = 'linear',
     EASE_IN = 'ease-in',
     EASE_OUT = 'ease-out',
     EASE_IN_OUT = 'ease-in-out'
+}
+
+export enum PiLeaderLineShowEffectName {
+    NONE = 'none',
+    FADE = 'fade',
+    DRAW = 'draw'
 }
