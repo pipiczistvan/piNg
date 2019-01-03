@@ -8,24 +8,26 @@ import { PiLeaderLineDirective } from 'projects/pi-leader-line/src/lib/pi-leader
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  title = 'piNg';
-  private showLine: boolean = true;
-
-  @ViewChild(PiLeaderLineDirective)
-  private leaderLine: PiLeaderLineDirective;
-
-  public lineOptions: PiLeaderLineOptions = {
-    color: 'red'
+  
+  public datasource = {
+    id: 1, name: 'Lao Lao', title: 'general manager',
+    children: [
+      { id: 2, name: 'Bo Miao', title: 'department manager' },
+      {
+        id: 3, name: 'Su Miao', title: 'department manager',
+        children: [
+          { id: 4, name: 'Tie Hua', title: 'senior engineer' },
+          {
+            id: 5, name: 'Hei Hei', title: 'senior engineer',
+            children: [
+              { id: 6, name: 'Pang Pang', title: 'engineer' },
+              { id: 7, name: 'Xiang Xiang', title: 'UE engineer' }
+            ]
+          }
+        ]
+      },
+      { id: 8, name: 'Hong Miao', title: 'department manager' },
+      { id: 9, name: 'Chun Miao', title: 'department manager' }
+    ]
   };
-
-  public toggle(): void {
-    if (this.showLine) {
-      this.leaderLine.hide(PiLeaderLineShowEffectName.FADE);
-      this.showLine = false;
-    } else {
-      this.leaderLine.show(PiLeaderLineShowEffectName.DRAW);
-      this.showLine = true;
-    }
-  }
 }

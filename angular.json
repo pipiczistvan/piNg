@@ -170,6 +170,41 @@
           }
         }
       }
+    },
+    "pi-tree-chart": {
+      "root": "projects/pi-tree-chart",
+      "sourceRoot": "projects/pi-tree-chart/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/pi-tree-chart/tsconfig.lib.json",
+            "project": "projects/pi-tree-chart/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pi-tree-chart/src/test.ts",
+            "tsConfig": "projects/pi-tree-chart/tsconfig.spec.json",
+            "karmaConfig": "projects/pi-tree-chart/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pi-tree-chart/tsconfig.lib.json",
+              "projects/pi-tree-chart/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "piNg"

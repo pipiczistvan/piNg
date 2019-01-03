@@ -1,0 +1,17 @@
+.pi-tree-chart {
+    box-sizing: border-box;
+    display: inline-block;
+    min-height: 202px;
+    min-width: 202px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 20px;
+    .hidden,
+    .pi-orgchart~.hidden {
+        display: none;
+    }
+}

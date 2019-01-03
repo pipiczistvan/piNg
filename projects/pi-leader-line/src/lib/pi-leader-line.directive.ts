@@ -1,4 +1,4 @@
-import { Directive, OnInit, Input } from '@angular/core';
+import { Directive, OnInit, Input, AfterViewInit } from '@angular/core';
 import { PiLeaderLineOptions, PiLeaderLineShowEffectName, PiLeaderLineAnimation } from './pi-leader-line.types';
 import PiLeaderLineOptionsMerger from './pi-leader-line.defaults';
 
@@ -7,20 +7,11 @@ declare var LeaderLine: any;
 @Directive({
   selector: 'pi-leader-line'
 })
-export class PiLeaderLineDirective implements OnInit {
+export class PiLeaderLineDirective {
 
-  @Input() public start: HTMLElement;
-  @Input() public end: HTMLElement;
   @Input() public options: PiLeaderLineOptions;
 
   private leaderLine: any;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.leaderLine = new LeaderLine(this.start, this.end);
-    this.leaderLine.setOptions(this.options);
-  }
 
   /**
    * Set one or more options.
@@ -33,7 +24,9 @@ export class PiLeaderLineDirective implements OnInit {
   /**
    * Show the leader line.
    */
-  public show(showEffectName: PiLeaderLineShowEffectName, animOptions?: PiLeaderLineAnimation): void {
+  public show(start: HTMLElement, end: HTMLElement, showEffectName: PiLeaderLineShowEffectName, animOptions?: PiLeaderLineAnimation): void {
+    this.leaderLine = new LeaderLine(start, end);
+    this.leaderLine.setOptions(this.options);
     const mergedOptions = PiLeaderLineOptionsMerger.mergeShowAnimationOptionsWithDefaults(animOptions);
     this.leaderLine.show(showEffectName, mergedOptions);
   }

@@ -24,6 +24,12 @@
       ],
       "pi-leader-line/*": [
         "dist/pi-leader-line/*"
+      ],
+      "pi-tree-chart": [
+        "dist/pi-tree-chart"
+      ],
+      "pi-tree-chart/*": [
+        "dist/pi-tree-chart/*"
       ]
     }
   }

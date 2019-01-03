@@ -1,0 +1,17 @@
+<table class="pi-tree-chart-node-table">
+  <tr>
+    <td [colSpan]="datasource.children && datasource.children.length ? datasource.children.length * 2 : null">
+      <div class="node" #node>
+        <ng-container *ngTemplateOutlet="nodeTemplateOutlet; context: {'context': datasource}"></ng-container>
+      </div>
+    </td>
+  </tr>
+  <ng-container *ngIf="datasource.children && datasource.children.length">
+    <tr>
+      <td style="padding: 100px 0" colspan="2" *ngFor="let child of datasource.children">
+        <pi-tree-chart-node #childNode [datasource]="child" [nodeTemplateOutlet]="nodeTemplateOutlet"></pi-tree-chart-node>
+        <pi-leader-line #line [options]="lineOptions"></pi-leader-line>
+      </td>
+    </tr>
+  </ng-container>
+</table>
