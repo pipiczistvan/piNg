@@ -10,28 +10,32 @@ import { PiLeaderLineShowEffectName, PiLeaderLineOptions, PiLeaderLineSocket, Pi
 })
 export class PiTreeChartNodeComponent implements AfterViewInit {
 
+  @Input() public lineOptions: PiLeaderLineOptions;
   @Input() public datasource: PiTreeChartDatasource;
   @Input() public nodeTemplateOutlet: TemplateRef<any>;
-  @ViewChild('node', {read: ElementRef}) public nodeElement: ElementRef;
-  @ViewChildren('childNode', {read: PiTreeChartNodeComponent}) public childElements: QueryList<PiTreeChartNodeComponent>;
-  @ViewChildren('line', {read: PiLeaderLineDirective}) public lines: QueryList<PiLeaderLineDirective>;
+  @Input() public parentNode: PiTreeChartNodeComponent;
+  @Input() public verticalSpace: number;
+  @ViewChild('node', { read: ElementRef }) public nodeElement: ElementRef;
+  @ViewChildren('childNode', { read: PiTreeChartNodeComponent }) public childElements: QueryList<PiTreeChartNodeComponent>;
+  @ViewChildren('line', { read: PiLeaderLineDirective }) public lines: QueryList<PiLeaderLineDirective>;
 
-  public readonly lineOptions: PiLeaderLineOptions = {
-    startSocket: PiLeaderLineSocket.BOTTOM,
-    endSocket: PiLeaderLineSocket.TOP,
-    endSocketGravity: [0, -50],
-    path: PiLeaderLinePath.FLUID,
-    dash: {
-      animation: true
-    }
-  };
+  private linesByNodeId: { [key: number]: PiLeaderLineDirective } = {};
 
   constructor() { }
 
   ngAfterViewInit(): void {
     const lineArray: PiLeaderLineDirective[] = this.lines.toArray();
     this.childElements.forEach((element, index) => {
-      lineArray[index].show(this.nodeElement.nativeElement, element.nodeElement.nativeElement, PiLeaderLineShowEffectName.NONE);
+      this.linesByNodeId[element.datasource.id] = lineArray[index];
+      this.linesByNodeId[element.datasource.id].create(this.nodeElement.nativeElement, element.nodeElement.nativeElement);
     });
+  }
+
+  public setParentConnector(lineOptions: PiLeaderLineOptions): void {
+    this.parentNode.setLineOptions(this, lineOptions);
+  }
+
+  private setLineOptions(node: PiTreeChartNodeComponent, options: PiLeaderLineOptions): void {
+    this.linesByNodeId[node.datasource.id].setOptions(options);
   }
 }

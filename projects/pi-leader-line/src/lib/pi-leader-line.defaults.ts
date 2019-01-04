@@ -1,6 +1,6 @@
 import { PiLeaderLineOptions, PiLeaderLinePath, PiLeaderLineSocket, PiLeaderLinePlug, PiLeaderLineDash, PiLeaderLineAnimation, PiLeaderLineAnimationTiming, PiLeaderLineGradient, PiLeaderLineShadow } from './pi-leader-line.types';
 
-const DEFAULT_OPTIONS: PiLeaderLineOptions = {
+export const DEFAULT_OPTIONS: PiLeaderLineOptions = {
     color: 'coral',
     size: 4,
     path: PiLeaderLinePath.FLUID,
@@ -57,8 +57,8 @@ const DEFAULT_SHADOW_OPTIONS: PiLeaderLineShadow = {
 
 export default class PiLeaderLineOptionsMerger {
 
-    public static mergeLineOptionsWithDefaults(options: PiLeaderLineOptions): PiLeaderLineOptions {
-        const mergedOptions: PiLeaderLineOptions = { ...DEFAULT_OPTIONS, ...options };
+    public static mergeLineOptions(oldOptions: PiLeaderLineOptions, newOptions: PiLeaderLineOptions): PiLeaderLineOptions {
+        const mergedOptions: PiLeaderLineOptions = { ...oldOptions, ...newOptions };
         mergedOptions.dash = this.mergeDashOptionsWithDefaults(mergedOptions.dash);
         mergedOptions.gradient = this.mergeGradientOptionsWithDefaults(mergedOptions.gradient);
         mergedOptions.dropShadow = this.mergeShadowOptionsWithDefaults(mergedOptions.dropShadow);

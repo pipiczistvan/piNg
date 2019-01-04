@@ -1,9 +1,10 @@
-<pi-tree-chart [datasource]="datasource" [nodeTemplateOutlet]="nodeTemplate">
-    <ng-template #nodeTemplate let-employee="context">
+<pi-tree-chart [datasource]="datasource" [nodeTemplateOutlet]="nodeTemplate" [lineOptions]="lineOptions" [verticalSpace]="100">
+    <ng-template #nodeTemplate let-employee="context" let-node="node">
         <div class="node">
             <div>{{employee.name}}</div>
             <div>{{employee.name | uppercase}}</div>
             <div>{{employee.title}}</div>
+            <button (click)="toggle(employee, node)">toggle</button>
         </div>
     </ng-template>
 </pi-tree-chart>

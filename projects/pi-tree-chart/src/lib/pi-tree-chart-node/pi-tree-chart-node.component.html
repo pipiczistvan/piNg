@@ -2,14 +2,20 @@
   <tr>
     <td [colSpan]="datasource.children && datasource.children.length ? datasource.children.length * 2 : null">
       <div class="node" #node>
-        <ng-container *ngTemplateOutlet="nodeTemplateOutlet; context: {'context': datasource}"></ng-container>
+        <ng-container *ngTemplateOutlet="nodeTemplateOutlet; context: {'context': datasource, 'node': this}"></ng-container>
       </div>
     </td>
   </tr>
   <ng-container *ngIf="datasource.children && datasource.children.length">
     <tr>
-      <td style="padding: 100px 0" colspan="2" *ngFor="let child of datasource.children">
-        <pi-tree-chart-node #childNode [datasource]="child" [nodeTemplateOutlet]="nodeTemplateOutlet"></pi-tree-chart-node>
+      <td [style.paddingTop]="verticalSpace + 'px'" [style.paddingBottom]="verticalSpace + 'px'" colspan="2" *ngFor="let child of datasource.children">
+        <pi-tree-chart-node #childNode 
+            [datasource]="child" 
+            [nodeTemplateOutlet]="nodeTemplateOutlet" 
+            [parentNode]="this"
+            [lineOptions]="lineOptions"
+            [verticalSpace]="verticalSpace"
+          ></pi-tree-chart-node>
         <pi-leader-line #line [options]="lineOptions"></pi-leader-line>
       </td>
     </tr>
