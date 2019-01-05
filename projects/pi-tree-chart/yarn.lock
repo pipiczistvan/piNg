@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@pipiczistvan/pi-leader-line@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@pipiczistvan/pi-leader-line/-/pi-leader-line-0.0.2.tgz#e88ecfcb2d47509304038697260d57b15d32cd88"
+"@pipiczistvan/pi-leader-line@git@github.com:pipiczistvan/piNg/tree/master/projects/pi-leader-line.git":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@pipiczistvan/pi-leader-line/-/pi-leader-line-0.0.1.tgz#063028893db03bee256db7288055445db6fb9fa2"
   dependencies:
     leader-line "^1.0.5"
     tslib "^1.9.0"

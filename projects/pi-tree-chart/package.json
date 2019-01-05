@@ -1,11 +1,11 @@
 {
   "name": "@pipiczistvan/pi-tree-chart",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
   },
   "dependencies": {
-    "@pipiczistvan/pi-leader-line": "0.0.2"
+    "@pipiczistvan/pi-leader-line": "git@github.com:pipiczistvan/piNg/tree/master/projects/pi-leader-line.git"
   }
 }
