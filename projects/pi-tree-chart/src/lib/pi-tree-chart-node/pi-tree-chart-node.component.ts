@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, TemplateRef, AfterViewInit, AfterContentInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, TemplateRef, AfterViewInit, AfterContentInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { PiTreeChartDatasource } from '../pi-tree-chart.types';
-import { PiLeaderLineDirective } from 'projects/pi-leader-line/src/lib/pi-leader-line.directive';
-import { PiLeaderLineShowEffectName, PiLeaderLineOptions, PiLeaderLineSocket, PiLeaderLinePath } from 'projects/pi-leader-line/src/lib/pi-leader-line.types';
+import { PiLeaderLineDirective } from '@pipiczistvan/pi-leader-line';
+import { PiLeaderLineOptions } from '@pipiczistvan/pi-leader-line';
 
 @Component({
   selector: 'pi-tree-chart-node',
   templateUrl: './pi-tree-chart-node.component.html',
   styleUrls: ['./pi-tree-chart-node.component.scss']
 })
-export class PiTreeChartNodeComponent implements AfterViewInit {
+export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
 
   @Input() public lineOptions: PiLeaderLineOptions;
   @Input() public datasource: PiTreeChartDatasource;
@@ -27,15 +27,39 @@ export class PiTreeChartNodeComponent implements AfterViewInit {
     const lineArray: PiLeaderLineDirective[] = this.lines.toArray();
     this.childElements.forEach((element, index) => {
       this.linesByNodeId[element.datasource.id] = lineArray[index];
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.parentNode) {
+      this.parentNode.removeLineOfComponent(this);
+    }
+  }
+
+  public createLines(): void {
+    this.childElements.forEach((element) => {
+      element.createLines();
       this.linesByNodeId[element.datasource.id].create(this.nodeElement.nativeElement, element.nodeElement.nativeElement);
     });
   }
 
   public setParentConnector(lineOptions: PiLeaderLineOptions): void {
-    this.parentNode.setLineOptions(this, lineOptions);
+    if (this.parentNode) {
+      this.parentNode.setLineOptions(this, lineOptions);
+    }
+  }
+
+  public getChildNodeComponents(): PiTreeChartNodeComponent[] {
+    return this.childElements
+      .map(child => [...child.getChildNodeComponents(), child])
+      .reduce((a, b) => a.concat(b), []);
   }
 
   private setLineOptions(node: PiTreeChartNodeComponent, options: PiLeaderLineOptions): void {
     this.linesByNodeId[node.datasource.id].setOptions(options);
+  }
+
+  private removeLineOfComponent(node: PiTreeChartNodeComponent): void {
+    this.linesByNodeId[node.datasource.id].remove();
   }
 }

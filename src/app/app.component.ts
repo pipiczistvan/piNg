@@ -10,6 +10,8 @@ import { PiTreeChartNodeComponent } from 'projects/pi-tree-chart/src/lib/pi-tree
 })
 export class AppComponent {
 
+  public destroyed: boolean = false;
+
   public readonly datasource = {
     id: 1, name: 'Lao Lao', title: 'general manager', toggle: false,
     children: [
@@ -50,5 +52,9 @@ export class AppComponent {
       node.setParentConnector({ color: 'black' });
     }
     datasource.toggle = !datasource.toggle;
+  }
+
+  public destroy(): void {
+    this.destroyed = !this.destroyed;
   }
 }

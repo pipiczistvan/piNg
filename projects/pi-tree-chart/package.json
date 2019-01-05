@@ -1,8 +1,11 @@
 {
-  "name": "pi-tree-chart",
-  "version": "0.0.1",
+  "name": "@pipiczistvan/pi-tree-chart",
+  "version": "0.0.4",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
+  },
+  "dependencies": {
+    "@pipiczistvan/pi-leader-line": "0.0.2"
   }
 }

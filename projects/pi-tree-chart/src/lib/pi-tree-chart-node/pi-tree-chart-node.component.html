@@ -8,7 +8,7 @@
   </tr>
   <ng-container *ngIf="datasource.children && datasource.children.length">
     <tr>
-      <td [style.paddingTop]="verticalSpace + 'px'" [style.paddingBottom]="verticalSpace + 'px'" colspan="2" *ngFor="let child of datasource.children">
+      <td [style.paddingTop]="verticalSpace + 'px'" colspan="2" *ngFor="let child of datasource.children">
         <pi-tree-chart-node #childNode 
             [datasource]="child" 
             [nodeTemplateOutlet]="nodeTemplateOutlet" 

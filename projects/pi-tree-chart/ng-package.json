@@ -3,5 +3,9 @@
   "dest": "../../dist/pi-tree-chart",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "@pipiczistvan/pi-leader-line"
+  ]
 }
