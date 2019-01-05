@@ -1,5 +1,5 @@
 {
-  "name": "@pipiczistvan/pi-leader-line",
+  "name": "@ping/pi-leader-line",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
@@ -7,5 +7,8 @@
   },
   "dependencies": {
     "leader-line": "^1.0.5"
+  },
+  "publishConfig": {
+    "registry": "http://192.168.0.112:4873"
   }
 }

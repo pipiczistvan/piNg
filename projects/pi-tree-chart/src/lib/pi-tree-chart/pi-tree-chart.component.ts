@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, TemplateRef, ViewChildren, QueryList, ViewChild, AfterViewInit } from '@angular/core';
 import { PiTreeChartDatasource } from '../pi-tree-chart.types';
-import { PiLeaderLineOptions } from '@pipiczistvan/pi-leader-line';
+import { PiLeaderLineOptions } from '@ping/pi-leader-line';
 import { PiTreeChartNodeComponent } from '../pi-tree-chart-node/pi-tree-chart-node.component';
 
 @Component({

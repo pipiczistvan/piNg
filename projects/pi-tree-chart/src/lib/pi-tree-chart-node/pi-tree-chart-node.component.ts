@@ -1,7 +1,7 @@
-import { Component, Input, TemplateRef, AfterViewInit, AfterContentInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, Input, TemplateRef, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { PiTreeChartDatasource } from '../pi-tree-chart.types';
-import { PiLeaderLineDirective } from '@pipiczistvan/pi-leader-line';
-import { PiLeaderLineOptions } from '@pipiczistvan/pi-leader-line';
+import { PiLeaderLineDirective } from '@ping/pi-leader-line';
+import { PiLeaderLineOptions } from '@ping/pi-leader-line';
 
 @Component({
   selector: 'pi-tree-chart-node',

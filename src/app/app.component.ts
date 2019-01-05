@@ -1,16 +1,19 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { PiLeaderLineOptions, PiLeaderLineShowEffectName, PiLeaderLineSocket, PiLeaderLinePath } from 'projects/pi-leader-line/src/lib/pi-leader-line.types';
 import { PiLeaderLineDirective } from 'projects/pi-leader-line/src/lib/pi-leader-line.directive';
 import { PiTreeChartNodeComponent } from 'projects/pi-tree-chart/src/lib/pi-tree-chart-node/pi-tree-chart-node.component';
+import { PiTreeChartComponent } from 'projects/pi-tree-chart/src/public_api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
   public destroyed: boolean = false;
+  @ViewChild('tree', {read: PiTreeChartComponent})
+  public tree: PiTreeChartComponent;
 
   public readonly datasource = {
     id: 1, name: 'Lao Lao', title: 'general manager', toggle: false,
@@ -44,6 +47,10 @@ export class AppComponent {
     },
     color: 'green'
   };
+
+  ngAfterViewInit(): void {
+    this.tree.createLines();
+  }
 
   public toggle(datasource: any, node: PiTreeChartNodeComponent): void {
     if (datasource.toggle) {

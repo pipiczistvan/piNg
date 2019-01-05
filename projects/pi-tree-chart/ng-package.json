@@ -6,6 +6,6 @@
   },
   "whitelistedNonPeerDependencies": [
     "tslib",
-    "@pipiczistvan/pi-leader-line"
+    "@ping/pi-leader-line"
   ]
 }
