@@ -9,6 +9,6 @@
     "@ping/pi-leader-line": "0.0.1"
   },
   "publishConfig": {
-    "registry": "http://192.168.0.112:4873"
+    "registry": "http://rsptn.ddns.net:4441"
   }
 }

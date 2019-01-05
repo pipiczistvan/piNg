@@ -33,19 +33,19 @@ To install Verdaccio follow these steps, or read the [official guide](https://ve
 For simplicity I will use my local verdaccio's address, but you have to change it to your own!
 #### Publish
 For publishing you have 2 ways to set your registry:
-* Use `--registry=http://192.168.0.112:4873` when you run ANY npm command.
+* Use `--registry=http://rsptn.ddns.net:4441` when you run ANY npm command.
 * Specify it in the library's `package.json` file:</br>
 `"publishConfig": {`</br>
-&nbsp;&nbsp;&nbsp;&nbsp;`"registry": "http://192.168.0.112:4873"`</br>
+&nbsp;&nbsp;&nbsp;&nbsp;`"registry": "http://rsptn.ddns.net:4441"`</br>
 `}`
 
 Now that the registry is set you can publish the package by following the next steps:
 * Navigate to repository's root folder
 * Run `ng build <library_name>`
 * Run `cd ./dist/<library_name>`
-* Create a new user with `npm adduser --registry http://192.168.0.112:4873`, or login with `npm login --registry http://192.168.0.112:4873`
-* Run `npm publish --registry http://192.168.0.112:4873`
+* Create a new user with `npm adduser --registry http://rsptn.ddns.net:4441`, or login with `npm login --registry http://rsptn.ddns.net:4441`
+* Run `npm publish --registry http://rsptn.ddns.net:4441`
 
 #### Install
 You have to create a `.npmrc` where you run the npm commands, and add the following line into it:</br>
-`registry=http://192.168.0.112:4873`
+`registry=http://rsptn.ddns.net:4441`
