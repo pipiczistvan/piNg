@@ -52,15 +52,6 @@ export class AppComponent implements AfterViewInit {
     this.tree.createLines();
   }
 
-  public toggle(datasource: any, node: PiTreeChartNodeComponent): void {
-    if (datasource.toggle) {
-      node.setParentConnector({ color: 'green' });
-    } else {
-      node.setParentConnector({ color: 'black' });
-    }
-    datasource.toggle = !datasource.toggle;
-  }
-
   public destroy(): void {
     this.destroyed = !this.destroyed;
   }

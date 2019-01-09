@@ -1,12 +1,6 @@
 <button (click)="destroy()">destroy</button>
 <pi-tree-chart #tree *ngIf="!destroyed" [datasource]="datasource" [nodeTemplateOutlet]="nodeTemplate" [lineOptions]="lineOptions" [verticalSpace]="100">
     <ng-template #nodeTemplate let-employee="context" let-node="node">
-        <div class="node">
-            <div>{{employee.id}}</div>
-            <div>{{employee.name}}</div>
-            <div>{{employee.name | uppercase}}</div>
-            <div>{{employee.title}}</div>
-            <button (click)="toggle(employee, node)">toggle</button>
-        </div>
+        <app-node [datasource]="employee" [nodeComponent]="node"></app-node>
     </ng-template>
 </pi-tree-chart>

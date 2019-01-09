@@ -36,6 +36,8 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  // PUBLIC METHODS
+
   public createLines(): void {
     this.childElements.forEach((element) => {
       element.createLines();
@@ -43,16 +45,53 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  public setParentConnector(lineOptions: PiLeaderLineOptions): void {
+  public setParentConnector(lineOptions: PiLeaderLineOptions, recursive?: boolean): void {
     if (this.parentNode) {
+      if (recursive) {
+        this.parentNode.setParentConnector(lineOptions, recursive);
+      }
       this.parentNode.setLineOptions(this, lineOptions);
     }
   }
 
-  public getChildNodeComponents(): PiTreeChartNodeComponent[] {
+  public setChildConnectors(lineOptions: PiLeaderLineOptions, recursive?: boolean): void {
+    this.lines.forEach(line => line.setOptions(lineOptions));
+    if (recursive) {
+      this.childElements.forEach(child => child.setChildConnectors(lineOptions, recursive));
+    }
+  }
+
+  public rePositionParentConnector(recursive?: boolean): void {
+    if (this.parentNode) {
+      if (recursive) {
+        this.parentNode.rePositionParentConnector(recursive);
+      }
+      this.parentNode.repositionLine(this);
+    }
+
+    this.lines.forEach(line => line.position());
+    if (recursive) {
+      this.childElements.forEach(child => child.rePositionChildConnectors(recursive));
+    }
+  }
+
+  public rePositionChildConnectors(recursive?: boolean): void {
+    this.lines.forEach(line => line.position());
+    if (recursive) {
+      this.childElements.forEach(child => child.rePositionChildConnectors(recursive));
+    }
+  }
+
+  public getChildNodeComponents(recursive?: boolean): PiTreeChartNodeComponent[] {
     return this.childElements
-      .map(child => [...child.getChildNodeComponents(), child])
+      .map(child => recursive ? [...child.getChildNodeComponents(), child] : [child])
       .reduce((a, b) => a.concat(b), []);
+  }
+
+  // PRIVATE METHODS
+
+  private repositionLine(node: PiTreeChartNodeComponent): void {
+    this.linesByNodeId[node.datasource.id].position;
   }
 
   private setLineOptions(node: PiTreeChartNodeComponent, options: PiLeaderLineOptions): void {
