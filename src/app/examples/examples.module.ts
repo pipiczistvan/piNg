@@ -4,11 +4,15 @@ import { BasicTreeComponent } from './basic-tree/basic-tree.component';
 import { ExampleService } from './example.service';
 import { BasicTreeNodeComponent } from './basic-tree/basic-tree-node/basic-tree-node.component';
 import { PiTreeChartModule } from 'projects/pi-tree-chart/src/public_api';
+import { CollapsedTreeComponent } from './collapsed-tree/collapsed-tree.component';
+import { CollapsedTreeNodeComponent } from './collapsed-tree/collapsed-tree-node/collapsed-tree-node.component';
 
 @NgModule({
   declarations: [
     BasicTreeComponent,
-    BasicTreeNodeComponent
+    BasicTreeNodeComponent,
+    CollapsedTreeComponent,
+    CollapsedTreeNodeComponent
   ],
   providers: [ExampleService],
   imports: [
@@ -16,7 +20,8 @@ import { PiTreeChartModule } from 'projects/pi-tree-chart/src/public_api';
     PiTreeChartModule
   ],
   exports: [
-    BasicTreeComponent
+    BasicTreeComponent,
+    CollapsedTreeComponent
   ]
 })
 export class ExamplesModule { }

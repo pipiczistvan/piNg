@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { PiLeaderLineOptions, PiLeaderLineSocket, PiLeaderLinePath } from 'projects/pi-leader-line/src/public_api';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { PiLeaderLineOptions } from 'projects/pi-leader-line/src/public_api';
 import { PiTreeChartComponent } from 'projects/pi-tree-chart/src/public_api';
 import { ExampleService } from '../example.service';
 
@@ -8,7 +8,7 @@ import { ExampleService } from '../example.service';
   templateUrl: './basic-tree.component.html',
   styleUrls: ['./basic-tree.component.scss']
 })
-export class BasicTreeComponent implements OnInit, AfterViewInit {
+export class BasicTreeComponent implements OnInit {
 
   @ViewChild('tree', {read: PiTreeChartComponent})
   public tree: PiTreeChartComponent;
@@ -23,10 +23,6 @@ export class BasicTreeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.datasource = this.exampleService.chineseOrgData();
     this.lineOptions = this.exampleService.lineOptions();
-  }
-
-  ngAfterViewInit(): void {
-    this.tree.createLines();
   }
 
   public destroy(): void {

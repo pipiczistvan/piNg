@@ -1,0 +1,11 @@
+<pi-tree-chart #tree class="tree-view"
+  [datasource]="datasource" 
+  [nodeTemplateOutlet]="nodeTemplate" 
+  [lineOptions]="lineOptions" 
+  [verticalSpace]="100"
+  [levelLimit]="1"
+>
+    <ng-template #nodeTemplate let-employee="context" let-node="node">
+        <ping-collapsed-tree-node [datasource]="employee" [nodeComponent]="node"></ping-collapsed-tree-node>
+    </ng-template>
+</pi-tree-chart>

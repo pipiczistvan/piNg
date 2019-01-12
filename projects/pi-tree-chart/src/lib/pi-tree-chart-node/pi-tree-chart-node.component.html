@@ -6,7 +6,7 @@
       </div>
     </td>
   </tr>
-  <ng-container *ngIf="datasource.children && datasource.children.length">
+  <ng-container *ngIf="createNextLevel">
     <tr>
       <td [style.paddingTop]="verticalSpace + 'px'" colspan="2" *ngFor="let child of datasource.children">
         <pi-tree-chart-node #childNode 
@@ -15,6 +15,8 @@
             [parentNode]="this"
             [lineOptions]="lineOptions"
             [verticalSpace]="verticalSpace"
+            [level]="level + 1"
+            [levelLimit]="levelLimit"
           ></pi-tree-chart-node>
         <pi-leader-line #line [options]="lineOptions"></pi-leader-line>
       </td>

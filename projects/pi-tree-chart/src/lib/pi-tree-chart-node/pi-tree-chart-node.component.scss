@@ -1,35 +1,8 @@
 table.pi-tree-chart-node-table {
-    border-spacing: 0;
-    border-collapse: separate;
-
     td {
         text-align: center;
         vertical-align: top;
         padding: 0;
-    }
-    .lines:nth-child(3) td {
-        box-sizing: border-box;
-        height: 20px;
-    }
-    .lines .topLine {
-        border-top: 2px solid rgba(217, 83, 79, 0.8);
-    }
-    .lines .rightLine {
-        border-right: 1px solid rgba(217, 83, 79, 0.8);
-        float: none;
-        border-radius: 0;
-    }
-    .lines .leftLine {
-        border-left: 1px solid rgba(217, 83, 79, 0.8);
-        float: none;
-        border-radius: 0;
-    }
-    .lines .downLine {
-        background-color: rgba(217, 83, 79, 0.8);
-        margin: 0 auto;
-        height: 20px;
-        width: 2px;
-        float: none;
     }
     .node {
         box-sizing: border-box;

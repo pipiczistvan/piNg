@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, Input, TemplateRef, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy, OnInit } from '@angular/core';
 import { PiTreeChartDatasource } from '../pi-tree-chart.types';
 import { PiLeaderLineDirective } from '@ping/pi-leader-line';
 import { PiLeaderLineOptions } from '@ping/pi-leader-line';
@@ -8,25 +8,38 @@ import { PiLeaderLineOptions } from '@ping/pi-leader-line';
   templateUrl: './pi-tree-chart-node.component.html',
   styleUrls: ['./pi-tree-chart-node.component.scss']
 })
-export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
+export class PiTreeChartNodeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() public lineOptions: PiLeaderLineOptions;
   @Input() public datasource: PiTreeChartDatasource;
   @Input() public nodeTemplateOutlet: TemplateRef<any>;
   @Input() public parentNode: PiTreeChartNodeComponent;
   @Input() public verticalSpace: number;
+  @Input() public level: number;
+  @Input() public levelLimit: number;
+
   @ViewChild('node', { read: ElementRef }) public nodeElement: ElementRef;
   @ViewChildren('childNode', { read: PiTreeChartNodeComponent }) public childElements: QueryList<PiTreeChartNodeComponent>;
   @ViewChildren('line', { read: PiLeaderLineDirective }) public lines: QueryList<PiLeaderLineDirective>;
 
+  createNextLevel: boolean = false;
   private linesByNodeId: { [key: number]: PiLeaderLineDirective } = {};
+  private childrenVisible: boolean;
 
   constructor() { }
 
+  ngOnInit(): void {
+    this.childrenVisible = this.levelLimit === undefined || this.level <= this.levelLimit;
+    this.createNextLevel = this.shouldCreateNextLevel();
+  }
+
   ngAfterViewInit(): void {
-    const lineArray: PiLeaderLineDirective[] = this.lines.toArray();
-    this.childElements.forEach((element, index) => {
-      this.linesByNodeId[element.datasource.id] = lineArray[index];
+    this.createLines();
+    this.lines.changes.subscribe(() => {
+      this.createLines();
+      setTimeout(() => {
+        this.findRootComponent().rePositionChildConnectors(true);
+      });
     });
   }
 
@@ -37,13 +50,6 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
   }
 
   // PUBLIC METHODS
-
-  public createLines(): void {
-    this.childElements.forEach((element) => {
-      element.createLines();
-      this.linesByNodeId[element.datasource.id].create(this.nodeElement.nativeElement, element.nodeElement.nativeElement);
-    });
-  }
 
   public setParentConnector(lineOptions: PiLeaderLineOptions, recursive?: boolean): void {
     if (this.parentNode) {
@@ -66,12 +72,7 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
       if (recursive) {
         this.parentNode.rePositionParentConnector(recursive);
       }
-      this.parentNode.repositionLine(this);
-    }
-
-    this.lines.forEach(line => line.position());
-    if (recursive) {
-      this.childElements.forEach(child => child.rePositionChildConnectors(recursive));
+      this.parentNode.rePositionChildConnectors();
     }
   }
 
@@ -88,11 +89,17 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
       .reduce((a, b) => a.concat(b), []);
   }
 
-  // PRIVATE METHODS
-
-  private repositionLine(node: PiTreeChartNodeComponent): void {
-    this.linesByNodeId[node.datasource.id].position;
+  public showChildren(): void {
+    this.childrenVisible = true;
+    this.createNextLevel = this.shouldCreateNextLevel();
   }
+
+  public hideChildren(): void {
+    this.childrenVisible = false;
+    this.createNextLevel = this.shouldCreateNextLevel();
+  }
+
+  // PRIVATE METHODS
 
   private setLineOptions(node: PiTreeChartNodeComponent, options: PiLeaderLineOptions): void {
     this.linesByNodeId[node.datasource.id].setOptions(options);
@@ -100,5 +107,26 @@ export class PiTreeChartNodeComponent implements AfterViewInit, OnDestroy {
 
   private removeLineOfComponent(node: PiTreeChartNodeComponent): void {
     this.linesByNodeId[node.datasource.id].remove();
+  }
+
+  private shouldCreateNextLevel(): boolean {
+    return this.datasource.children !== undefined && this.datasource.children.length > 0 && this.childrenVisible;
+  }
+
+  private createLines(): void {
+    this.linesByNodeId = {};
+    const childElementArray: PiTreeChartNodeComponent[] = this.childElements.toArray();
+    this.lines.forEach((line, index) => {
+      const childElement: PiTreeChartNodeComponent = childElementArray[index];
+      this.linesByNodeId[childElement.datasource.id] = line;
+      line.create(this.nodeElement.nativeElement, childElement.nodeElement.nativeElement);
+    });
+  }
+
+  private findRootComponent(): PiTreeChartNodeComponent {
+    if (this.parentNode) {
+      return this.parentNode.findRootComponent();
+    }
+    return this;
   }
 }
