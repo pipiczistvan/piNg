@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PiTreeChartNodeComponent } from 'projects/pi-tree-chart/src/public_api';
 
 @Component({
-  selector: 'app-node',
-  templateUrl: './app-node.component.html',
-  styleUrls: ['./app-node.component.scss']
+  selector: 'ping-basic-tree-node',
+  templateUrl: './basic-tree-node.component.html',
+  styleUrls: ['./basic-tree-node.component.scss']
 })
-export class AppNodeComponent implements OnInit {
+export class BasicTreeNodeComponent implements OnInit {
 
   @Input() public datasource: any;
   @Input() public nodeComponent: PiTreeChartNodeComponent;
@@ -31,4 +31,5 @@ export class AppNodeComponent implements OnInit {
   public grow(element: HTMLElement):void {
     element.style.height = (element.offsetHeight + 10) + 'px';
   }
+
 }

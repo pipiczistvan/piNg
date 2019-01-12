@@ -1,18 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { PiTreeChartModule } from 'projects/pi-tree-chart/src/public_api';
-import { AppNodeComponent } from './app-node/app-node.component';
+import { ExamplesModule } from './examples/examples.module';
+import { IndexComponent } from './index/index.component';
+import { RoutingModule } from './routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNodeComponent
+    IndexComponent
   ],
   imports: [
     BrowserModule,
-    PiTreeChartModule
+    ExamplesModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

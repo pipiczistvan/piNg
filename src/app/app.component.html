@@ -1,6 +1,4 @@
-<button (click)="destroy()">destroy</button>
-<pi-tree-chart #tree *ngIf="!destroyed" [datasource]="datasource" [nodeTemplateOutlet]="nodeTemplate" [lineOptions]="lineOptions" [verticalSpace]="100">
-    <ng-template #nodeTemplate let-employee="context" let-node="node">
-        <app-node [datasource]="employee" [nodeComponent]="node"></app-node>
-    </ng-template>
-</pi-tree-chart>
+<nav class="app-nav">
+    <a routerLink="/index">INDEX</a>
+</nav>
+<router-outlet></router-outlet>

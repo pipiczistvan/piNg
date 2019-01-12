@@ -1,0 +1,6 @@
+<button (click)="destroy()">destroy</button>
+<pi-tree-chart #tree *ngIf="!destroyed" [datasource]="datasource" [nodeTemplateOutlet]="nodeTemplate" [lineOptions]="lineOptions" [verticalSpace]="100">
+    <ng-template #nodeTemplate let-employee="context" let-node="node">
+        <ping-basic-tree-node [datasource]="employee" [nodeComponent]="node"></ping-basic-tree-node>
+    </ng-template>
+</pi-tree-chart>
