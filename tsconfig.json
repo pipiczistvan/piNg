@@ -30,6 +30,12 @@
       ],
       "pi-tree-chart/*": [
         "dist/pi-tree-chart/*"
+      ],
+      "pi-iframe": [
+        "dist/pi-iframe"
+      ],
+      "pi-iframe/*": [
+        "dist/pi-iframe/*"
       ]
     }
   }

@@ -205,6 +205,41 @@
           }
         }
       }
+    },
+    "pi-iframe": {
+      "root": "projects/pi-iframe",
+      "sourceRoot": "projects/pi-iframe/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/pi-iframe/tsconfig.lib.json",
+            "project": "projects/pi-iframe/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pi-iframe/src/test.ts",
+            "tsConfig": "projects/pi-iframe/tsconfig.spec.json",
+            "karmaConfig": "projects/pi-iframe/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pi-iframe/tsconfig.lib.json",
+              "projects/pi-iframe/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "piNg"
